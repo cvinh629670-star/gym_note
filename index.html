@@ -1,0 +1,151 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0a1226"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-180.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="DZ Gym"><title>DZ Gym Log</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
+:root{--ink:#0d1a33;--mute:#5b6b88;--line:#dde5f2;--bg:#eaf0fb;--paper:#f5f8fd;--push:#ff5a5f;--push2:#ff9068;--pull:#2f7cf6;--pull2:#5fb2ff;--leg:#12a874;--leg2:#4fd9a2;color-scheme:light;font-family:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;color:var(--ink);background:radial-gradient(900px 480px at 50% -10%,#c9dcff,transparent),var(--bg)}
+.app{max-width:460px;min-height:100dvh;margin:auto;background:var(--paper);box-shadow:0 0 60px #0a12261f;padding-bottom:88px;overflow:hidden}
+.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.dark{position:relative;color:#fff;background:radial-gradient(420px 260px at 92% -5%,#2c5fd47a,transparent 70%),radial-gradient(300px 220px at 0 45%,#ff5a5f26,transparent 70%),linear-gradient(160deg,#10203f,#080e1e)}
+.dark::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(#ffffff09 1px,transparent 1px),linear-gradient(90deg,#ffffff09 1px,transparent 1px);background-size:28px 28px;-webkit-mask-image:linear-gradient(#000,transparent 75%);mask-image:linear-gradient(#000,transparent 75%)}
+.dark>*{position:relative}
+.dark:not(.header):not(.calhead){min-height:calc(100dvh - 88px)}
+.header{padding:26px 20px 24px}.calhead{padding:24px 18px 36px}
+.brand{display:flex;gap:13px;align-items:center}
+.logo{width:52px;height:52px;border-radius:17px;display:grid;place-items:center;font-size:27px;color:#fff;background:linear-gradient(145deg,#5aa3ff,#2358d6);box-shadow:0 10px 24px #2f7cf65c,inset 0 1px 0 #ffffff59}
+.brand h1,.header h1{font-size:22px;margin:0;font-weight:800;letter-spacing:.4px}
+.sub{font-size:13px;color:#ffffffb8;margin:3px 0 0}
+.range,.datebox{display:flex;align-items:center;gap:10px;margin-top:22px;padding:14px 16px;font-size:14px;font-weight:500;background:#ffffff12;border:1px solid #ffffff20;border-radius:16px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.range .i,.datebox .i{font-size:19px;color:#8cc0ff}
+.datebox{justify-content:space-between;margin-top:16px}.dt{display:flex;align-items:center;gap:10px;font-weight:650}
+.datebox button{border:1px solid #ffffff22;background:#ffffff1c;color:#fff;border-radius:11px;font-size:20px;width:38px;height:38px;font-family:inherit}
+.cards{display:grid;gap:14px;margin:20px}
+.workcard{position:relative;overflow:hidden;border:0;color:#fff;text-align:left;padding:18px;border-radius:22px;display:flex;align-items:center;gap:15px;font-family:inherit;font-size:20px;font-weight:750;cursor:pointer;box-shadow:0 16px 28px -12px var(--sh),inset 0 1px 0 #ffffff47;transition:transform .15s}
+.workcard:active{transform:scale(.98)}
+.push{--sh:#ff5a5f;background:linear-gradient(120deg,var(--push),var(--push2))}
+.pull{--sh:#2f7cf6;background:linear-gradient(120deg,var(--pull),var(--pull2))}
+.leg{--sh:#12a874;background:linear-gradient(120deg,var(--leg),var(--leg2))}
+.wbg{position:absolute;right:-12px;top:50%;transform:translateY(-50%);font-size:118px;opacity:.15;display:grid;pointer-events:none}.wbg .i{stroke-width:1.5}
+.workcard .emoji{width:54px;height:54px;border-radius:17px;display:grid;place-items:center;font-size:26px;background:#ffffff2e;border:1px solid #ffffff45;flex:none}
+.workcard>span:nth-child(3){flex:1;min-width:0}
+.workcard small{display:block;font-size:12.5px;font-weight:500;margin:4px 0 9px;opacity:.95}
+.workcard .arrow{margin-left:auto;font-size:20px;display:grid}
+.bar{display:block;height:6px;border-radius:9px;background:#ffffff38;overflow:hidden}
+.bar u{display:block;height:100%;border-radius:9px;background:#fff;text-decoration:none;transition:width .3s}
+.section{padding:6px 20px 24px}.section h3{font-size:14px;font-weight:600;color:#ffffffc4;margin:6px 0 10px}
+.switch{display:flex;padding:4px;border-radius:15px;background:#ffffff14;border:1px solid #ffffff18}
+.switch button{flex:1;border:0;background:none;color:#ffffffbd;padding:11px;border-radius:12px;font-family:inherit;font-size:14px;font-weight:600}
+.switch .active{background:#fff;color:var(--ink);box-shadow:0 6px 14px #0005}
+.foot{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(460px,100%);z-index:5;display:flex;justify-content:space-around;padding:8px 6px max(10px,env(safe-area-inset-bottom));background:#0a1429ee;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-top:1px solid #ffffff14}
+.foot button{border:0;background:none;color:#aebcd4;font-family:inherit;font-size:11px;font-weight:600;display:grid;gap:3px;justify-items:center;cursor:pointer}
+.foot button span{width:52px;height:30px;border-radius:15px;display:grid;place-items:center;font-size:21px;transition:background .2s}
+.foot button.active{color:#9ccaff}.foot button.active span{background:#3b8bff33}
+.top{position:relative;overflow:hidden;color:#fff;padding:22px 18px 42px}
+.top::after{content:"";position:absolute;right:-40px;top:-50px;width:200px;height:200px;border-radius:50%;background:#ffffff1f}
+.top::before{content:"";position:absolute;right:50px;bottom:-70px;width:130px;height:130px;border-radius:50%;background:#ffffff12}
+.topline{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+.back{border:1px solid #ffffff3d;background:#ffffff26;color:#fff;border-radius:13px;width:40px;height:40px;padding:0;display:grid;place-items:center;font-size:23px;font-family:inherit}
+.ticon{width:46px;height:46px;border-radius:15px;background:#ffffff2e;display:grid;place-items:center;font-size:25px}
+.top h2{margin:0;font-size:23px;font-weight:800}.top p{margin:2px 0 0;font-size:13px;opacity:.92}
+.tprog{position:relative;z-index:1;margin-top:18px;display:grid;gap:8px;font-size:12.5px;font-weight:600}
+.paper{position:relative;margin-top:-20px;min-height:60vh;padding:12px 12px 24px;background:var(--paper);border-radius:26px 26px 0 0;box-shadow:0 -10px 30px #0a12261c}
+.tablehead,.exercise{display:grid;grid-template-columns:24px minmax(0,1fr) 46px 46px 54px;align-items:center;gap:6px}
+.tablehead{padding:8px 8px 4px;font-size:11.5px;font-weight:700;color:var(--mute);text-align:center}.tablehead span:nth-child(2){text-align:left}
+.exercise{margin-top:8px;padding:10px 8px;font-size:12px;background:#fff;border:1px solid var(--line);border-radius:16px;transition:border-color .2s,box-shadow .2s}
+.exercise .n{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;color:var(--mute);background:#e8eefb}
+.exercise.done{border-color:var(--ac);box-shadow:0 8px 16px -12px var(--ac)}.exercise.done .n{background:var(--ac);color:#fff}
+.exercise label{font-size:12.5px;font-weight:600;line-height:1.35;overflow-wrap:anywhere;color:var(--ink)}
+.exercise input{width:100%;min-width:0;padding:11px 1px;border:1.5px solid #d3ddee;border-radius:11px;background:#f3f6fc;text-align:center;font-family:inherit;font-size:14px;font-weight:700;color:#142744;-webkit-text-fill-color:#142744;-webkit-appearance:none;appearance:none;cursor:pointer;caret-color:transparent;touch-action:manipulation}
+.exercise input::placeholder{color:#9aa9c4;-webkit-text-fill-color:#9aa9c4;opacity:1}
+.exercise input:focus{background:#fff;border-color:var(--ac,#3b8bff);outline:0;box-shadow:0 0 0 3px #3b8bff26}
+.save{width:100%;margin-top:22px;padding:16px;border:0;border-radius:16px;color:#fff;font-family:inherit;font-size:16px;font-weight:750;box-shadow:0 14px 24px -12px var(--sh)}
+.viewmonth{width:100%;margin-top:12px;padding:13px;border-radius:14px;background:#fff;border:1px solid var(--line);color:#1a3c67;font-family:inherit;font-weight:600}
+.mini,.hint{font-size:12px;line-height:1.55;color:#526580}.mini{margin:14px 0 0}
+.calendar{position:relative;margin-top:-20px;min-height:68vh;padding:18px 16px 30px;background:var(--paper);border-radius:26px 26px 0 0;box-shadow:0 -10px 30px #0a12261c}
+.calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center}
+.weekday{padding:8px 0;font-size:12px;font-weight:700;color:var(--mute)}
+.day{min-height:48px;display:grid;align-content:center;justify-items:center;gap:4px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);font-family:inherit;font-size:14px;font-weight:650}
+.day.selected{border-color:transparent;color:#fff;background:linear-gradient(140deg,#4a97ff,#2358d6);box-shadow:0 10px 18px -8px #2f7cf6}
+.dots{display:flex;justify-content:center;gap:3px;height:5px}.dot{width:5px;height:5px;border-radius:50%}.day.selected .dot{box-shadow:0 0 0 1.5px #fff}
+.legend{display:flex;gap:16px;margin:20px 0 16px;font-size:12px;font-weight:600;color:var(--mute)}.legend span{display:flex;align-items:center;gap:6px}
+.stats{padding:16px;border-radius:16px;font-size:14px;color:var(--ink);background:linear-gradient(135deg,#e3edff,#f1f6ff);border:1px solid #d3e1fb}.stats strong{font-size:26px;color:#2358d6}
+.settings{padding:22px 20px;background:var(--paper);color:var(--ink)}.settings h2{margin:0 0 6px;font-size:20px}
+.settings button{display:block;width:100%;margin:12px 0;padding:15px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);text-align:left;font-family:inherit;font-size:14px;font-weight:600}
+.settings .danger{color:#d23b43}
+.srow{display:flex;align-items:center;gap:14px;margin:12px 0;padding:14px;background:#fff;border:1px solid var(--line);border-radius:18px}
+.srow i{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;font-size:23px;color:#fff;font-style:normal;flex:none}
+.srow>div{flex:1}.srow strong{display:block;margin-bottom:9px}.srow .bar{background:#e6edf9}.srow b{font-size:22px}
+.keypad-overlay{position:fixed;inset:0;z-index:30;display:flex;align-items:flex-end;justify-content:center;background:#07142699;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.keypad-panel{width:min(460px,100%);padding:16px 18px calc(18px + env(safe-area-inset-bottom));background:var(--paper);color:var(--ink);border-radius:28px 28px 0 0;box-shadow:0 -18px 40px #0004;animation:kp .22s ease-out}
+@keyframes kp{from{transform:translateY(40px);opacity:0}}
+.keypad-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.keypad-title{font-size:14px;font-weight:750}.keypad-sub{font-size:12px;color:var(--mute);margin-top:3px}
+.keypad-close{border:0;background:#e6ecf8;color:var(--ink);border-radius:11px;width:38px;height:38px;font-size:20px}
+.keypad-display{min-height:60px;margin-bottom:12px;padding:10px;font-size:32px;font-weight:800;text-align:center;color:#10203e;background:#e9f0fc;border:1px solid #d3e0f6;border-radius:16px}
+.keypad-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.keypad-grid button{min-height:58px;border:1px solid var(--line);border-radius:15px;background:#fff;color:var(--ink);font-family:inherit;font-size:24px;font-weight:700;box-shadow:0 2px 0 #dde5f2;touch-action:manipulation}
+.keypad-grid button:active{background:#dbeafe;transform:translateY(1px);box-shadow:none}.keypad-grid .key-del{background:#e6ecf8}
+.keypad-actions{display:flex;gap:9px;margin-top:10px}
+.keypad-actions button{flex:1;border:0;border-radius:14px;padding:14px;background:#e6ecf8;color:#172a47;font-family:inherit;font-size:15px;font-weight:700}
+.keypad-actions .key-done{background:linear-gradient(140deg,#4a97ff,#2358d6)!important;box-shadow:0 10px 18px -8px #2f7cf6}
+.hide{display:none!important}
+button:focus-visible,input:focus-visible{outline:2px solid #2b7cf0;outline-offset:2px}
+@media(max-width:360px){.exercise,.tablehead{grid-template-columns:20px minmax(0,1fr) 42px 42px 48px;gap:4px}.paper{padding-inline:9px}}
+@media(max-height:630px){.keypad-panel{padding-top:9px}.keypad-grid button{min-height:42px}.keypad-display{font-size:23px;padding:6px;min-height:40px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.exercise{display:block;padding:12px 10px}
+.exhead{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.exbody{display:grid;grid-template-columns:minmax(0,1.25fr) 48px 48px 56px;gap:6px;align-items:stretch}
+.exbody input{min-height:54px;padding:0}
+.prevcol{display:grid;align-content:center;gap:1px;min-width:0;padding:6px 9px;border-radius:11px;background:#eef3fb;border:1px dashed #c7d4ea}
+.prevcol small{font-size:10.5px;font-weight:600;color:var(--mute)}.prevcol b{font-size:15px;color:var(--ink)}.prevcol em{font-style:normal;font-size:12px;font-weight:600;color:var(--mute)}
+.sug{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;margin-top:9px;padding:8px 8px 8px 11px;border:1px solid color-mix(in srgb,var(--ac) 40%,white);border-radius:12px;background:color-mix(in srgb,var(--ac) 9%,white);color:var(--ink);font-family:inherit;font-size:12.5px;text-align:left}
+.sug span{flex:none;padding:6px 13px;border-radius:9px;background:var(--ac);color:#fff;font-size:12px;font-weight:700}
+.sugall{width:100%;margin:6px 0 4px;padding:13px;border:1.5px solid var(--ac);border-radius:14px;background:#fff;color:var(--ink);font-family:inherit;font-size:13.5px;font-weight:700}
+.srow small{font-weight:500}
+@media(max-width:360px){.exbody{grid-template-columns:minmax(0,1fr) 42px 42px 48px}}
+html{-webkit-text-size-adjust:100%}body{overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation}
+.header,.top{padding-top:calc(env(safe-area-inset-top) + 22px)}
+@media(max-width:480px),(display-mode:standalone){.app{box-shadow:none}}
+.filebtn{display:block;margin:12px 0;padding:15px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);font-size:14px;font-weight:600;cursor:pointer}
+.settings .install{color:#fff;border:0;background:linear-gradient(140deg,#4a97ff,#2358d6);box-shadow:0 12px 22px -12px #2f7cf6}
+</style></head><body><main class="app" id="app"></main><script>
+const routines={push:['Landmine Press','Bench Press','Incline Smith Machine Press','Incline Dumbbell Press','Dips','Lateral Raise Combo (Lateral / Front / Overhead Press)','Tricep Extension','Tricep Pushdown'],pull:['Weighted Pull-up','Seated Cable Row','Barbell Row','Face Pull','Rear Delt Cable Fly','Cable Biceps Curl','Hammer Curl','Wrist Combo (Curl / Reverse Curl / Twist)'],leg:['Jump Squat','Deadlift','Leg Press','Lunge Combo','Leg Extension','Leg Curl','Calf Kick','Abs']};const I=p=>`<svg class="i" viewBox="0 0 24 24">${p}</svg>`;const colors={push:'#f35c61',pull:'#3188f4',leg:'#21aa79'},icons={push:I('<path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/>'),pull:I('<path d="M3 4h18M8 4v5M16 4v5"/><circle cx="12" cy="12" r="2.6"/><path d="M9 21v-3.5a3 3 0 0 1 6 0V21"/>'),leg:I('<path d="M4 20h5v-5h5v-5h6"/><path d="M15 5h5v5M20 5l-6 6"/>')},IC={cal:I('<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>'),home:I('<path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/>'),stats:I('<path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>'),set:I('<path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/>'),next:I('<path d="M9 6l6 6-6 6"/>')};let view='home',routine='push',date=todayStr();let data={};try{data=JSON.parse(localStorage.getItem('dzGymLogV2')||'{}')}catch{}const app=document.getElementById('app');const fmt=d=>d.split('-').reverse().join('/');const key=(r,d,i)=>`${r}_${d}_${i}`;const stored=(r,d,i)=>data[key(r,d,i)]||{};function persist(){localStorage.setItem('dzGymLogV2',JSON.stringify(data))}function nav(v,r){view=v;date=todayStr();if(r)routine=r;render();window.scrollTo(0,0)}function todayStr(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+const has=v=>v&&(v.set||v.rep||v.kg);
+function sessions(r){const s=new Set();for(const k of Object.keys(data)){const m=k.match(/^([a-z]+)_(\d{4}-\d\d-\d\d)_\d+$/);if(m&&m[1]===r&&has(data[k]))s.add(m[2])}return[...s].sort()}
+function prev(r,i){for(const d of sessions(r).filter(x=>x<date).reverse()){const v=stored(r,d,i);if(has(v))return{...v,d}}return null}
+function suggest(p){if(!p)return null;const rs=String(p.rep||'').split(/[\/,\s-]+/).map(parseFloat).filter(n=>!isNaN(n));const kg=parseFloat(String(p.kg||'').replace(',','.'));const set=p.set||'';if(!rs.length)return{set,rep:p.rep||'',kg:p.kg||''};const lo=Math.min(...rs);if(isNaN(kg))return{set,rep:String(lo+1),kg:''};if(lo>=12){const st=kg<20?1:2.5;return{set,rep:'8',kg:String(+(kg+st).toFixed(1))}}return{set,rep:String(lo+1),kg:String(kg)}}
+const cap=r=>r[0].toUpperCase()+r.slice(1);function edit(r,i,field,val){const k=key(r,date,i);data[k]??={};data[k][field]=val;persist()}const prog=r=>routines[r].filter((_,i)=>{const v=stored(r,date,i);return v.set||v.rep||v.kg}).length;function header(){return `<div class="header"><div class="brand"><div class="logo">${icons.push}</div><div><h1>DZ GYM LOG</h1><div class="sub">Better You Everyday</div></div></div><div class="range">${IC.cal}<span>${['Chủ nhật','Thứ hai','Thứ ba','Thứ tư','Thứ năm','Thứ sáu','Thứ bảy'][new Date(date+'T12:00:00').getDay()]}, ${fmt(date)}</span></div></div>`}function footer(active){return `<nav class="foot">${[['home',IC.home,'Trang chủ'],['stats',IC.stats,'Thống kê'],['settings',IC.set,'Cài đặt']].map(([v,ic,t])=>`<button class="${active===v?'active':''}" onclick="nav('${v}')"><span>${ic}</span>${t}</button>`).join('')}</nav>`}function home(){app.innerHTML=`<div class="dark">${header()}<div class="cards">${Object.keys(routines).map(r=>{const ls=sessions(r).filter(d=>d<date).pop();return `<button class="workcard ${r}" onclick="nav('work','${r}')"><i class="wbg">${icons[r]}</i><span class="emoji">${icons[r]}</span><span>${cap(r)}<small>${prog(r)}/8 hôm nay · ${ls?'lần trước '+fmt(ls).slice(0,5):'chưa tập'}</small><em class="bar"><u style="width:${prog(r)*12.5}%"></u></em></span><span class="arrow">${IC.next}</span></button>`}).join('')}</div></div>${footer('home')}`};
+function work(){const ls=sessions(routine).filter(d=>d<date).pop();const sgs=routines[routine].map((_,i)=>suggest(prev(routine,i)));app.innerHTML=`<div class="top ${routine}"><div class="topline"><button class="back" onclick="nav('home')">‹</button><span class="ticon">${icons[routine]}</span><div><h2>${cap(routine)}</h2><p>Hôm nay ${fmt(date)}${ls?' · lần trước '+fmt(ls).slice(0,5):' · buổi đầu tiên'}</p></div></div><div class="tprog"><span>${prog(routine)}/8 bài đã ghi</span><em class="bar"><u style="width:${prog(routine)*12.5}%"></u></em></div></div><div class="paper" style="--ac:${colors[routine]}">${sgs.some(Boolean)?`<button class="sugall" onclick="document.querySelectorAll('.sug').forEach(b=>b.click())">Dùng tất cả gợi ý cho hôm nay</button>`:''}${routines[routine].map((name,i)=>{const d=stored(routine,date,i),p=prev(routine,i),sg=sgs[i];return `<div class="exercise${has(d)?' done':''}" data-i="${i}"><div class="exhead"><span class="n">${i+1}</span><label>${name}</label></div><div class="exbody"><div class="prevcol">${p?`<small>Lần trước · ${fmt(p.d).slice(0,5)}</small><b>${esc(p.set||'–')}×${esc(p.rep||'–')}</b><em>${p.kg?esc(p.kg)+' kg':'tạ thân'}</em>`:`<small>Lần trước</small><em>Chưa có</em>`}</div><input aria-label="Số set ${name}" readonly inputmode="none" placeholder="Set" value="${esc(d.set||'')}" oninput="edit('${routine}',${i},'set',this.value)"><input aria-label="Số rep ${name}" readonly inputmode="none" placeholder="Rep" value="${esc(d.rep||'')}" oninput="edit('${routine}',${i},'rep',this.value)"><input aria-label="Số kg ${name}" readonly inputmode="none" placeholder="Kg" value="${esc(d.kg||'')}" oninput="edit('${routine}',${i},'kg',this.value)"></div>${sg?`<button class="sug" type="button"><b>Gợi ý hôm nay: ${esc(sg.set||'–')}×${esc(sg.rep||'–')} · ${sg.kg?esc(sg.kg)+' kg':'tạ thân'}</b><span>Dùng</span></button>`:''}</div>`}).join('')}<button class="save ${routine}" onclick="persist();this.textContent='✓ Đã lưu';setTimeout(()=>this.textContent='✓ Lưu bài tập',1200)">✓ Lưu bài tập</button><p class="mini">Dữ liệu tự lưu khi nhập. Lần sau tập ${cap(routine)}, số liệu hôm nay sẽ hiện ở cột "Lần trước". Gợi ý: đạt 12 rep thì tăng tạ (2.5 kg, hoặc 1 kg nếu dưới 20 kg) và về 8 rep; chưa đạt thì giữ tạ và thêm 1 rep. Bạn vẫn sửa tự do. Rep nhập dạng 8, 8/10/10 hoặc Max.</p></div>${footer('')}`};
+function esc(s){return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;')}function count(){return Object.keys(data).filter(k=>Object.values(data[k]||{}).some(v=>String(v).trim())).length}function dayTypes(d){return Object.keys(routines).filter(r=>routines[r].some((_,i)=>{let v=stored(r,d,i);return v.set||v.rep||v.kg}))}function stats(){const per=Object.keys(routines).map(r=>({r,n:sessions(r).length,last:sessions(r).pop()}));const mx=Math.max(1,...per.map(p=>p.n));app.innerHTML=`<div class="dark header"><h1>Thống kê</h1><p class="sub">Số buổi đã tập theo từng lịch</p></div><div class="settings"><h2>${new Set(per.flatMap(p=>sessions(p.r))).size} ngày đã ghi</h2>${per.map(({r,n,last})=>`<div class="srow"><i class="${r}">${icons[r]}</i><div><strong>${cap(r)} <small class="hint">· gần nhất ${last?fmt(last).slice(0,5):'chưa có'}</small></strong><em class="bar"><u style="width:${n*100/mx}%;background:${colors[r]}"></u></em></div><b>${n}</b></div>`).join('')}<p class="hint">Mỗi buổi là một ngày có ghi ít nhất một bài của lịch đó.</p></div>${footer('stats')}`};function settings(){app.innerHTML=`<div class="dark header"><h1>Cài đặt</h1><p class="sub">Quản lý dữ liệu tập luyện</p></div><div class="settings">${installed()?'':`<button class="install" onclick="installApp()">Cài app lên màn hình chính</button>`}<button onclick="exportJSON()">Sao lưu dữ liệu (JSON)</button><label class="filebtn">Khôi phục từ file sao lưu<input type="file" accept=".json,application/json" hidden onchange="importJSON(this.files[0])"></label><button onclick="exportCSV()">Xuất dữ liệu CSV</button><button class="danger" onclick="if(confirm('Xóa toàn bộ dữ liệu đã ghi?')){data={};persist();render()}">Xóa toàn bộ ghi chú</button><p class="hint">Dữ liệu lưu trên trình duyệt hiện tại. Nếu xóa dữ liệu trình duyệt, ghi chú có thể mất. Hãy xuất CSV để sao lưu.</p></div>${footer('settings')}`};function exportCSV(){const rows=[['Lịch','Ngày','Bài tập','Set','Rep','Kg']];for(const r of Object.keys(routines))for(const day of sessions(r))routines[r].forEach((name,i)=>{const v=stored(r,day,i);if(has(v))rows.push([r,day,name,v.set||'',v.rep||'',v.kg||''])});const csv='\ufeff'+rows.map(row=>row.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='DZ-Gym-Log.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}function render(){({home,work,stats,settings}[view]||home)()}render();
+
+// Inputs are read-only on purpose: use our 0–9 keypad instead of the phone keyboard.
+let keypadInput=null;
+function closeKeypad(){document.getElementById('gymKeypad')?.remove();keypadInput=null}
+function openKeypad(el){
+ if(keypadInput===el)return;
+ closeKeypad();keypadInput=el;
+ const row=el.closest('.exercise');const name=row?.querySelector('label')?.textContent||'Bài tập';
+ const field=el.getAttribute('aria-label')||'';
+ const modal=document.createElement('div');modal.id='gymKeypad';modal.className='keypad-overlay';
+ modal.innerHTML=`<div class="keypad-panel" role="dialog" aria-modal="true" aria-label="Bàn phím nhập số"><div class="keypad-top"><div><div class="keypad-title">${esc(name)}</div><div class="keypad-sub">${esc(field.startsWith('Số set')?'Số set':field.startsWith('Số rep')?'Số rep':'Mức tạ (kg)')}</div></div><button class="keypad-close" type="button" data-key="done" aria-label="Đóng">×</button></div><div class="keypad-display" id="keypadValue"></div><div class="keypad-grid">${['1','2','3','4','5','6','7','8','9','.','0','⌫'].map(x=>`<button type="button" data-key="${x==='⌫'?'back':x}" class="${x==='⌫'?'key-del':''}">${x}</button>`).join('')}</div><div class="keypad-actions"><button type="button" data-key="clear">Xóa hết</button><button type="button" class="key-done" data-key="done" style="background:#287de9;color:white">✓ Xong</button></div></div>`;
+ modal.addEventListener('click',e=>{if(e.target===modal)closeKeypad()});
+ modal.querySelectorAll('[data-key]').forEach(btn=>btn.addEventListener('click',()=>keypadPress(btn.dataset.key)));
+ document.body.append(modal);updateKeypadDisplay();
+}
+function updateKeypadDisplay(){const display=document.getElementById('keypadValue');if(display)display.textContent=keypadInput?.value||'—'}
+function keypadPress(k){if(!keypadInput)return;navigator.vibrate?.(8);if(k==='done'){closeKeypad();return}
+ let v=keypadInput.value;
+ if(k==='clear')v='';else if(k==='back')v=v.slice(0,-1);else if(k==='.') {if(!v.includes('.'))v=(v||'0')+'.'}else if(/^\d$/.test(k)&&v.length<9)v+=k;
+ keypadInput.value=v;keypadInput.dispatchEvent(new Event('input',{bubbles:true}));updateKeypadDisplay();
+}
+document.addEventListener('click',e=>{const el=e.target.closest?.('.exercise input[readonly]');if(el)openKeypad(el)});
+document.addEventListener('keydown',e=>{if(!keypadInput)return;if(e.key==='Escape'){closeKeypad();return}if(e.key==='Backspace'){keypadPress('back');return}if(e.key==='Enter'){closeKeypad();return}if(/^[0-9.]$/.test(e.key))keypadPress(e.key)});
+document.addEventListener('input',e=>{const row=e.target.closest?.('.exercise');if(!row)return;row.classList.toggle('done',[...row.querySelectorAll('input')].some(x=>x.value.trim()));const n=document.querySelectorAll('.exercise.done').length,t=document.querySelector('.tprog');if(t){t.querySelector('span').textContent=n+'/8 bài đã ghi';t.querySelector('u').style.width=n*12.5+'%'}});
+document.addEventListener('click',e=>{const b=e.target.closest?.('.sug');if(!b)return;const row=b.closest('.exercise'),s=suggest(prev(routine,+row.dataset.i));if(!s)return;const ins=row.querySelectorAll('input');[s.set,s.rep,s.kg].forEach((v,k)=>{if(v!==''&&v!=null){ins[k].value=v;ins[k].dispatchEvent(new Event('input',{bubbles:true}))}})});
+let dip=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dip=e});
+function installed(){return matchMedia('(display-mode: standalone)').matches||navigator.standalone}
+function installApp(){if(dip){dip.prompt();dip=null}else alert('iPhone (Safari): nút Chia sẻ → Thêm vào MH chính.\nAndroid (Chrome): menu ⋮ → Cài đặt ứng dụng / Thêm vào màn hình chính.')}
+function exportJSON(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data)],{type:'application/json'}));a.download='DZ-Gym-Log-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function importJSON(f){if(!f)return;f.text().then(t=>{try{const x=JSON.parse(t);if(!x||typeof x!=='object')throw 0;Object.assign(data,x);persist();alert('Đã khôi phục dữ liệu');render()}catch{alert('File sao lưu không hợp lệ')}})}
+if('serviceWorker' in navigator&&location.protocol.startsWith('http'))addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+navigator.storage?.persist?.();
+</script></body></html>
