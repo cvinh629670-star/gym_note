@@ -1,4 +1,4 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0a1226"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-180.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="DZ Gym"><title>DZ Gym Log</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#191629"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-180.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="DZ Gym"><title>DZ Gym Log</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet"><style>
 :root{--ink:#0d1a33;--mute:#5b6b88;--line:#dde5f2;--bg:#eaf0fb;--paper:#f5f8fd;--push:#ff5a5f;--push2:#ff9068;--pull:#2f7cf6;--pull2:#5fb2ff;--leg:#12a874;--leg2:#4fd9a2;color-scheme:light;font-family:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;color:var(--ink);background:radial-gradient(900px 480px at 50% -10%,#c9dcff,transparent),var(--bg)}
@@ -107,15 +107,478 @@ html{-webkit-text-size-adjust:100%}body{overscroll-behavior:none;-webkit-user-se
 @media(max-width:480px),(display-mode:standalone){.app{box-shadow:none}}
 .filebtn{display:block;margin:12px 0;padding:15px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);font-size:14px;font-weight:600;cursor:pointer}
 .settings .install{color:#fff;border:0;background:linear-gradient(140deg,#4a97ff,#2358d6);box-shadow:0 12px 22px -12px #2f7cf6}
+
+/* DZ Gym Log — shared interface */
+:root {
+  --ink: #f0f3f4;
+  --mute: #adb7bf;
+  --line: #333c44;
+  --bg: #101417;
+  --paper: #171c20;
+  --panel: #20272c;
+  --lime: #d1f67a;
+  --push: #ff9b87;
+  --push2: #ffb8a8;
+  --pull: #8ebcff;
+  --pull2: #b4d3ff;
+  --leg: #a6e1ac;
+  --leg2: #c4f0c8;
+  color-scheme: dark;
+}
+body {
+  background: radial-gradient(ellipse at top, #27332a, transparent 42rem), var(--bg);
+}
+.app {
+  --content-width: 960px;
+  width: min(100%, var(--content-width));
+  max-width: none;
+  min-height: 100dvh;
+  padding-bottom: calc(84px + env(safe-area-inset-bottom));
+  border-inline: 1px solid #ffffff0e;
+  box-shadow: none;
+}
+.dark, .top {
+  background: radial-gradient(ellipse at 100% 0%, #34412d, transparent 68%), #1b2223;
+}
+.dark::before, .top::before, .top::after { display: none; }
+.dark:not(.header):not(.calhead) { min-height: auto; }
+.header, .top, .settings, .paper {
+  padding-inline: clamp(16px, 5vw, 44px);
+}
+.header, .top { padding-top: calc(env(safe-area-inset-top) + 32px); }
+.header { padding-bottom: 24px; }
+.header h1, .top h2 {
+  color: var(--ink);
+  font-size: clamp(26px, 5vw, 40px);
+  line-height: 1.12;
+  letter-spacing: -.045em;
+}
+.brand { gap: 14px; }
+.logo {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: var(--lime);
+  color: #202b13;
+  box-shadow: none;
+}
+.sub { margin-top: 6px; color: var(--mute); }
+.range {
+  width: fit-content;
+  margin-top: 22px;
+  padding: 10px 13px;
+  border-radius: 10px;
+  color: var(--ink);
+  background: #141a19;
+  border-color: #ffffff1f;
+  font-size: 12px;
+}
+.range .i { color: var(--lime); font-size: 16px; }
+.push { --accent: var(--push); }
+.pull { --accent: var(--pull); }
+.leg { --accent: var(--leg); }
+.cards {
+  margin: 0;
+  padding: 0 clamp(16px, 5vw, 44px) 32px;
+  gap: 12px;
+}
+.workcard {
+  min-height: 112px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  color: var(--ink);
+  background: linear-gradient(120deg, color-mix(in srgb, var(--accent) 12%, var(--panel)), var(--panel) 75%);
+  box-shadow: none;
+}
+.workcard .emoji, .ticon, .srow i {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 15%, var(--panel));
+  border: 1px solid color-mix(in srgb, var(--accent) 27%, var(--panel));
+}
+.workcard .emoji { width: 48px; height: 48px; border-radius: 13px; }
+.wbg { display: none; }
+.workcard small { color: var(--mute); line-height: 1.45; }
+.workcard .arrow { color: var(--accent); }
+.bar, .srow .bar { height: 4px; background: #ffffff21; }
+.bar u { background: var(--accent, var(--lime)); }
+.foot {
+  width: min(100%, 960px);
+  padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+  background: #171c20f5;
+  border-color: var(--line);
+}
+.foot button {
+  flex: 1;
+  min-height: 54px;
+  align-content: center;
+  color: var(--mute);
+}
+.foot button.active { color: var(--lime); }
+.foot button.active span { background: #d1f67a22; }
+.top { padding-bottom: 30px; border-bottom: 1px solid var(--line); }
+.top p { color: var(--mute); }
+.back, .keypad-close {
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  cursor: pointer;
+}
+.paper {
+  margin-top: 0;
+  padding-top: 16px;
+  border-radius: 0;
+  box-shadow: none;
+}
+.exercise, .srow, .settings button, .settings .filebtn {
+  color: var(--ink);
+  background: var(--panel);
+  border-color: var(--line);
+  border-radius: 14px;
+}
+.exercise { padding: 13px; margin-top: 12px; }
+.exercise label { font-size: 14px; }
+.exercise .n { border-radius: 7px; background: #343e46; }
+.exercise.done .n { color: #101417; }
+.exbody { grid-template-columns: minmax(0, 1.45fr) repeat(3, minmax(0, 1fr)); }
+.prevcol, .exercise input, .exercise input:focus {
+  background: #161b1f;
+  border-color: #45515a;
+}
+.exercise input {
+  color: var(--ink);
+  -webkit-text-fill-color: var(--ink);
+  font-size: 16px;
+}
+.exercise input:focus { border-color: var(--ac); }
+.exercise input::placeholder { color: var(--mute); -webkit-text-fill-color: var(--mute); }
+.sug, .sugall {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--ac) 10%, var(--paper));
+  border-color: color-mix(in srgb, var(--ac) 38%, var(--paper));
+}
+.sug span, .save, .settings .install {
+  color: #1c2512;
+  background: var(--lime);
+  box-shadow: none;
+}
+.mini, .hint { color: var(--mute); }
+.settings { padding-top: 24px; }
+.settings .danger { color: #ffabac; }
+.srow b { font-variant-numeric: tabular-nums; }
+.keypad-panel { color: var(--ink); border: 1px solid var(--line); }
+.keypad-display, .keypad-grid button, .keypad-grid .key-del, .keypad-actions button {
+  color: var(--ink);
+  background: var(--panel);
+  border-color: var(--line);
+  box-shadow: none;
+}
+.keypad-grid button:active { background: #39443b; }
+.keypad-actions .key-done {
+  background: var(--lime) !important;
+  color: #1c2512;
+  box-shadow: none;
+}
+button, .filebtn { cursor: pointer; }
+button:focus-visible, input:focus-visible, .filebtn:focus-within {
+  outline: 2px solid var(--lime);
+  outline-offset: 3px;
+}
+@media (hover: hover) {
+  .workcard:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .settings button:hover, .filebtn:hover { border-color: var(--lime); }
+}
+@media (min-width: 700px) {
+  .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .workcard {
+    min-height: 192px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-content: space-between;
+    font-size: 25px;
+  }
+  .workcard .emoji { grid-column: 1 / -1; }
+  .paper {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 12px;
+  }
+  .exercise { margin: 0; }
+  .paper > :is(.sugall, .save, .mini) { grid-column: 1 / -1; }
+  .settings button, .settings .filebtn { max-width: 540px; }
+}
+
+.analytics { display: grid; gap: 16px; margin-top: 24px; }
+.analytics-panel {
+  min-width: 0;
+  padding: clamp(14px, 3vw, 24px);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--panel);
+}
+.analytics-panel h2 { font-size: 18px; margin-bottom: 8px; }
+.chart-filter { display: grid; gap: 6px; margin: 12px 0; color: var(--mute); font-size: 12px; }
+.chart-filter select {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+}
+.chart-filter select:focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; }
+.chart-bars { display: grid; gap: 10px; padding: 0; list-style: none; margin: 16px 0; }
+.chart-bars li {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) minmax(46px, auto);
+  align-items: center;
+  gap: 8px;
+  color: var(--mute);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.chart-bars strong { color: var(--ink); text-align: right; }
+.chart-track { height: 12px; overflow: hidden; background: var(--paper); border-radius: 4px; }
+.chart-track span { display: block; height: 100%; background: var(--chart-accent, var(--lime)); border-radius: inherit; }
+.progress-summary, .progress-target { margin: 12px 0; font-size: 13px; line-height: 1.55; }
+.progress-target { padding: 10px; border-radius: 9px; background: var(--paper); }
+.progress-target strong { color: var(--lime); }
+@media (min-width: 760px) { .analytics { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; } }
+/* Pixel arcade theme */
+:root {
+  --ink: #f5f3e8;
+  --mute: #c0bbd0;
+  --line: #51496c;
+  --bg: #100e1d;
+  --paper: #191629;
+  --panel: #25203b;
+  --lime: #d9fb80;
+  --push: #ff9ea8;
+  --pull: #8edcff;
+  --leg: #a6ed9d;
+  --pixel-shadow: #0a0812;
+  --pixel-grid: linear-gradient(#ada2e213 1px, transparent 1px), linear-gradient(90deg, #ada2e213 1px, transparent 1px);
+  --pixel-font: "Press Start 2P", "Courier New", monospace;
+}
+body {
+  background: var(--pixel-grid) 0 0 / 16px 16px, var(--bg);
+}
+.app { border-inline: 2px solid var(--line); }
+.dark, .top {
+  background: var(--pixel-grid) 0 0 / 16px 16px, linear-gradient(150deg, #30254c, var(--paper) 70%);
+}
+.header, .top { padding-top: calc(env(safe-area-inset-top) + 28px); }
+.header h1, .top h2 {
+  font-family: var(--pixel-font);
+  font-size: clamp(15px, 3.4vw, 27px);
+  line-height: 1.6;
+  letter-spacing: 0;
+  color: var(--lime);
+  text-shadow: 3px 3px var(--pixel-shadow);
+}
+.logo {
+  flex: none;
+  background: var(--lime);
+  border: 3px solid #efffc0;
+  box-shadow: 4px 4px var(--pixel-shadow);
+}
+.logo .i { display: none; }
+.logo::before {
+  content: "";
+  width: 32px;
+  height: 24px;
+  background: #262035;
+  clip-path: polygon(0 29%, 13% 29%, 13% 12%, 28% 12%, 28% 42%, 72% 42%, 72% 12%, 87% 12%, 87% 29%, 100% 29%, 100% 71%, 87% 71%, 87% 88%, 72% 88%, 72% 58%, 28% 58%, 28% 88%, 13% 88%, 13% 71%, 0 71%);
+}
+.range {
+  background: var(--paper);
+  border: 2px solid var(--line);
+  box-shadow: 3px 3px var(--pixel-shadow);
+}
+.logo, .range, .workcard, .workcard .emoji, .ticon, .back,
+.exercise, .exercise .n, .prevcol, .exercise input, .sug, .sug span, .sugall,
+.save, .settings button, .settings .filebtn, .srow, .srow i, .foot button span,
+.keypad-panel, .keypad-close, .keypad-display, .keypad-grid button, .keypad-actions button,
+.analytics-panel, .chart-filter select, .chart-track, .chart-track span, .progress-target, .bar, .bar u {
+  border-radius: 0;
+}
+.cards { gap: 16px; }
+.workcard {
+  min-height: 108px;
+  background: repeating-linear-gradient(0deg, transparent 0 3px, #0002 3px 4px), var(--panel);
+  border: 2px solid var(--accent);
+  box-shadow: 4px 4px var(--pixel-shadow);
+}
+.workcard > span:nth-child(3) {
+  color: var(--accent);
+  font-family: var(--pixel-font);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.workcard small { font-family: "Be Vietnam Pro", system-ui, sans-serif; }
+.workcard .emoji, .ticon, .srow i {
+  background: var(--paper);
+  border: 2px solid var(--accent);
+}
+.workcard .i, .ticon .i, .srow .i, .foot .i { stroke-linecap: square; stroke-linejoin: miter; }
+.bar, .srow .bar, .chart-track { background: #100e1d; }
+.bar u, .chart-track span {
+  background-image: repeating-linear-gradient(90deg, transparent 0 7px, #100e1d 7px 9px);
+}
+.chart-track span { background-color: var(--chart-accent, var(--lime)); }
+.tprog .bar { height: 8px; }
+.top, .foot { border-color: var(--line); }
+.foot {
+  background: #191629fb;
+  border-top-width: 2px;
+}
+.foot button.active span { background: var(--lime); color: var(--paper); }
+.exercise, .srow, .settings button, .settings .filebtn, .analytics-panel {
+  border-width: 2px;
+  box-shadow: 3px 3px var(--pixel-shadow);
+}
+.exercise .n, .keypad-close, .keypad-display, .keypad-grid button, .keypad-actions button {
+  background: #332b4b;
+}
+.prevcol, .exercise input, .exercise input:focus, .chart-filter select {
+  background: #151124;
+  border-color: var(--line);
+}
+.exercise input:focus { border-color: var(--ac); }
+.save, .settings .install, .keypad-actions .key-done {
+  border: 2px solid #efffc0;
+  box-shadow: 3px 3px var(--pixel-shadow);
+}
+.keypad-display, .keypad-grid button { font-family: var(--pixel-font); }
+.keypad-display { font-size: clamp(14px, 4vw, 21px); display: grid; place-content: center; overflow-wrap: anywhere; }
+.keypad-grid button { font-size: 17px; border-width: 2px; }
+.keypad-panel { border-width: 2px; }
+.progress-target { border-left: 3px solid var(--lime); }
+@media (hover: hover) {
+  .workcard:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px var(--pixel-shadow); }
+}
+@media (min-width: 700px) {
+  .workcard { min-height: 176px; }
+  .workcard > span:nth-child(3) { font-size: 16px; }
+}
+@media (max-width: 360px) {
+  .workcard { gap: 10px; padding: 12px; }
+  .brand { gap: 12px; }
+  .logo { width: 44px; height: 44px; }
+}
 </style></head><body><main class="app" id="app"></main><script>
-const routines={push:['Landmine Press','Bench Press','Incline Smith Machine Press','Incline Dumbbell Press','Dips','Lateral Raise Combo (Lateral / Front / Overhead Press)','Tricep Extension','Tricep Pushdown'],pull:['Weighted Pull-up','Seated Cable Row','Barbell Row','Face Pull','Rear Delt Cable Fly','Cable Biceps Curl','Hammer Curl','Wrist Combo (Curl / Reverse Curl / Twist)'],leg:['Jump Squat','Deadlift','Leg Press','Lunge Combo','Leg Extension','Leg Curl','Calf Kick','Abs']};const I=p=>`<svg class="i" viewBox="0 0 24 24">${p}</svg>`;const colors={push:'#f35c61',pull:'#3188f4',leg:'#21aa79'},icons={push:I('<path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/>'),pull:I('<path d="M3 4h18M8 4v5M16 4v5"/><circle cx="12" cy="12" r="2.6"/><path d="M9 21v-3.5a3 3 0 0 1 6 0V21"/>'),leg:I('<path d="M4 20h5v-5h5v-5h6"/><path d="M15 5h5v5M20 5l-6 6"/>')},IC={cal:I('<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>'),home:I('<path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/>'),stats:I('<path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>'),set:I('<path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/>'),next:I('<path d="M9 6l6 6-6 6"/>')};let view='home',routine='push',date=todayStr();let data={};try{data=JSON.parse(localStorage.getItem('dzGymLogV2')||'{}')}catch{}const app=document.getElementById('app');const fmt=d=>d.split('-').reverse().join('/');const key=(r,d,i)=>`${r}_${d}_${i}`;const stored=(r,d,i)=>data[key(r,d,i)]||{};function persist(){localStorage.setItem('dzGymLogV2',JSON.stringify(data))}function nav(v,r){view=v;date=todayStr();if(r)routine=r;render();window.scrollTo(0,0)}function todayStr(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+const routines={push:['Landmine Press','Bench Press','Incline Smith Machine Press','Incline Dumbbell Press','Dips','Lateral Raise Combo (Lateral / Front / Overhead Press)','Tricep Extension','Tricep Pushdown'],pull:['Weighted Pull-up','Seated Cable Row','Barbell Row','Face Pull','Rear Delt Cable Fly','Cable Biceps Curl','Hammer Curl','Wrist Combo (Curl / Reverse Curl / Twist)'],leg:['Jump Squat','Deadlift','Leg Press','Lunge Combo','Leg Extension','Leg Curl','Calf Kick','Abs']};const I=p=>`<svg class="i" viewBox="0 0 24 24">${p}</svg>`;const colors={push:'#ff9ea8',pull:'#8edcff',leg:'#a6ed9d'},icons={push:I('<path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/>'),pull:I('<path d="M3 4h18M8 4v5M16 4v5"/><circle cx="12" cy="12" r="2.6"/><path d="M9 21v-3.5a3 3 0 0 1 6 0V21"/>'),leg:I('<path d="M4 20h5v-5h5v-5h6"/><path d="M15 5h5v5M20 5l-6 6"/>')},IC={cal:I('<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>'),home:I('<path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/>'),stats:I('<path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>'),set:I('<path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/>'),next:I('<path d="M9 6l6 6-6 6"/>')};let view='home',routine='push',date=todayStr();let data={};try{data=JSON.parse(localStorage.getItem('dzGymLogV2')||'{}')}catch{}const app=document.getElementById('app');const fmt=d=>d.split('-').reverse().join('/');const key=(r,d,i)=>`${r}_${d}_${i}`;const stored=(r,d,i)=>data[key(r,d,i)]||{};function persist(){localStorage.setItem('dzGymLogV2',JSON.stringify(data))}function nav(v,r){view=v;date=todayStr();if(r)routine=r;render();window.scrollTo(0,0)}function todayStr(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 const has=v=>v&&(v.set||v.rep||v.kg);
 function sessions(r){const s=new Set();for(const k of Object.keys(data)){const m=k.match(/^([a-z]+)_(\d{4}-\d\d-\d\d)_\d+$/);if(m&&m[1]===r&&has(data[k]))s.add(m[2])}return[...s].sort()}
 function prev(r,i){for(const d of sessions(r).filter(x=>x<date).reverse()){const v=stored(r,d,i);if(has(v))return{...v,d}}return null}
 function suggest(p){if(!p)return null;const rs=String(p.rep||'').split(/[\/,\s-]+/).map(parseFloat).filter(n=>!isNaN(n));const kg=parseFloat(String(p.kg||'').replace(',','.'));const set=p.set||'';if(!rs.length)return{set,rep:p.rep||'',kg:p.kg||''};const lo=Math.min(...rs);if(isNaN(kg))return{set,rep:String(lo+1),kg:''};if(lo>=12){const st=kg<20?1:2.5;return{set,rep:'8',kg:String(+(kg+st).toFixed(1))}}return{set,rep:String(lo+1),kg:String(kg)}}
-const cap=r=>r[0].toUpperCase()+r.slice(1);function edit(r,i,field,val){const k=key(r,date,i);data[k]??={};data[k][field]=val;persist()}const prog=r=>routines[r].filter((_,i)=>{const v=stored(r,date,i);return v.set||v.rep||v.kg}).length;function header(){return `<div class="header"><div class="brand"><div class="logo">${icons.push}</div><div><h1>DZ GYM LOG</h1><div class="sub">Better You Everyday</div></div></div><div class="range">${IC.cal}<span>${['Chủ nhật','Thứ hai','Thứ ba','Thứ tư','Thứ năm','Thứ sáu','Thứ bảy'][new Date(date+'T12:00:00').getDay()]}, ${fmt(date)}</span></div></div>`}function footer(active){return `<nav class="foot">${[['home',IC.home,'Trang chủ'],['stats',IC.stats,'Thống kê'],['settings',IC.set,'Cài đặt']].map(([v,ic,t])=>`<button class="${active===v?'active':''}" onclick="nav('${v}')"><span>${ic}</span>${t}</button>`).join('')}</nav>`}function home(){app.innerHTML=`<div class="dark">${header()}<div class="cards">${Object.keys(routines).map(r=>{const ls=sessions(r).filter(d=>d<date).pop();return `<button class="workcard ${r}" onclick="nav('work','${r}')"><i class="wbg">${icons[r]}</i><span class="emoji">${icons[r]}</span><span>${cap(r)}<small>${prog(r)}/8 hôm nay · ${ls?'lần trước '+fmt(ls).slice(0,5):'chưa tập'}</small><em class="bar"><u style="width:${prog(r)*12.5}%"></u></em></span><span class="arrow">${IC.next}</span></button>`}).join('')}</div></div>${footer('home')}`};
-function work(){const ls=sessions(routine).filter(d=>d<date).pop();const sgs=routines[routine].map((_,i)=>suggest(prev(routine,i)));app.innerHTML=`<div class="top ${routine}"><div class="topline"><button class="back" onclick="nav('home')">‹</button><span class="ticon">${icons[routine]}</span><div><h2>${cap(routine)}</h2><p>Hôm nay ${fmt(date)}${ls?' · lần trước '+fmt(ls).slice(0,5):' · buổi đầu tiên'}</p></div></div><div class="tprog"><span>${prog(routine)}/8 bài đã ghi</span><em class="bar"><u style="width:${prog(routine)*12.5}%"></u></em></div></div><div class="paper" style="--ac:${colors[routine]}">${sgs.some(Boolean)?`<button class="sugall" onclick="document.querySelectorAll('.sug').forEach(b=>b.click())">Dùng tất cả gợi ý cho hôm nay</button>`:''}${routines[routine].map((name,i)=>{const d=stored(routine,date,i),p=prev(routine,i),sg=sgs[i];return `<div class="exercise${has(d)?' done':''}" data-i="${i}"><div class="exhead"><span class="n">${i+1}</span><label>${name}</label></div><div class="exbody"><div class="prevcol">${p?`<small>Lần trước · ${fmt(p.d).slice(0,5)}</small><b>${esc(p.set||'–')}×${esc(p.rep||'–')}</b><em>${p.kg?esc(p.kg)+' kg':'tạ thân'}</em>`:`<small>Lần trước</small><em>Chưa có</em>`}</div><input aria-label="Số set ${name}" readonly inputmode="none" placeholder="Set" value="${esc(d.set||'')}" oninput="edit('${routine}',${i},'set',this.value)"><input aria-label="Số rep ${name}" readonly inputmode="none" placeholder="Rep" value="${esc(d.rep||'')}" oninput="edit('${routine}',${i},'rep',this.value)"><input aria-label="Số kg ${name}" readonly inputmode="none" placeholder="Kg" value="${esc(d.kg||'')}" oninput="edit('${routine}',${i},'kg',this.value)"></div>${sg?`<button class="sug" type="button"><b>Gợi ý hôm nay: ${esc(sg.set||'–')}×${esc(sg.rep||'–')} · ${sg.kg?esc(sg.kg)+' kg':'tạ thân'}</b><span>Dùng</span></button>`:''}</div>`}).join('')}<button class="save ${routine}" onclick="persist();this.textContent='✓ Đã lưu';setTimeout(()=>this.textContent='✓ Lưu bài tập',1200)">✓ Lưu bài tập</button><p class="mini">Dữ liệu tự lưu khi nhập. Lần sau tập ${cap(routine)}, số liệu hôm nay sẽ hiện ở cột "Lần trước". Gợi ý: đạt 12 rep thì tăng tạ (2.5 kg, hoặc 1 kg nếu dưới 20 kg) và về 8 rep; chưa đạt thì giữ tạ và thêm 1 rep. Bạn vẫn sửa tự do. Rep nhập dạng 8, 8/10/10 hoặc Max.</p></div>${footer('')}`};
-function esc(s){return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;')}function count(){return Object.keys(data).filter(k=>Object.values(data[k]||{}).some(v=>String(v).trim())).length}function dayTypes(d){return Object.keys(routines).filter(r=>routines[r].some((_,i)=>{let v=stored(r,d,i);return v.set||v.rep||v.kg}))}function stats(){const per=Object.keys(routines).map(r=>({r,n:sessions(r).length,last:sessions(r).pop()}));const mx=Math.max(1,...per.map(p=>p.n));app.innerHTML=`<div class="dark header"><h1>Thống kê</h1><p class="sub">Số buổi đã tập theo từng lịch</p></div><div class="settings"><h2>${new Set(per.flatMap(p=>sessions(p.r))).size} ngày đã ghi</h2>${per.map(({r,n,last})=>`<div class="srow"><i class="${r}">${icons[r]}</i><div><strong>${cap(r)} <small class="hint">· gần nhất ${last?fmt(last).slice(0,5):'chưa có'}</small></strong><em class="bar"><u style="width:${n*100/mx}%;background:${colors[r]}"></u></em></div><b>${n}</b></div>`).join('')}<p class="hint">Mỗi buổi là một ngày có ghi ít nhất một bài của lịch đó.</p></div>${footer('stats')}`};function settings(){app.innerHTML=`<div class="dark header"><h1>Cài đặt</h1><p class="sub">Quản lý dữ liệu tập luyện</p></div><div class="settings">${installed()?'':`<button class="install" onclick="installApp()">Cài app lên màn hình chính</button>`}<button onclick="exportJSON()">Sao lưu dữ liệu (JSON)</button><label class="filebtn">Khôi phục từ file sao lưu<input type="file" accept=".json,application/json" hidden onchange="importJSON(this.files[0])"></label><button onclick="exportCSV()">Xuất dữ liệu CSV</button><button class="danger" onclick="if(confirm('Xóa toàn bộ dữ liệu đã ghi?')){data={};persist();render()}">Xóa toàn bộ ghi chú</button><p class="hint">Dữ liệu lưu trên trình duyệt hiện tại. Nếu xóa dữ liệu trình duyệt, ghi chú có thể mất. Hãy xuất CSV để sao lưu.</p></div>${footer('settings')}`};function exportCSV(){const rows=[['Lịch','Ngày','Bài tập','Set','Rep','Kg']];for(const r of Object.keys(routines))for(const day of sessions(r))routines[r].forEach((name,i)=>{const v=stored(r,day,i);if(has(v))rows.push([r,day,name,v.set||'',v.rep||'',v.kg||''])});const csv='\ufeff'+rows.map(row=>row.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='DZ-Gym-Log.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}function render(){({home,work,stats,settings}[view]||home)()}render();
+const cap=r=>r[0].toUpperCase()+r.slice(1);function edit(r,i,field,val){const k=key(r,date,i);data[k]??={};data[k][field]=val;persist()}const prog=r=>routines[r].filter((_,i)=>{const v=stored(r,date,i);return v.set||v.rep||v.kg}).length;function header(){return `<div class="header"><div class="brand"><div class="logo">${icons.push}</div><div><h1>DZ GYM LOG</h1><div class="sub">Better You Everyday</div></div></div><div class="range">${IC.cal}<span>${['Chủ nhật','Thứ hai','Thứ ba','Thứ tư','Thứ năm','Thứ sáu','Thứ bảy'][new Date(date+'T12:00:00').getDay()]}, ${fmt(date)}</span></div></div>`}function footer(active){return `<nav class="foot" aria-label="Điều hướng chính">${[['home',IC.home,'Trang chủ'],['stats',IC.stats,'Thống kê'],['settings',IC.set,'Cài đặt']].map(([v,ic,t])=>`<button class="${active===v?'active':''}" onclick="nav('${v}')"><span>${ic}</span>${t}</button>`).join('')}</nav>`}function home(){app.innerHTML=`<div class="dark">${header()}<div class="cards">${Object.keys(routines).map(r=>{const ls=sessions(r).filter(d=>d<date).pop();return `<button class="workcard ${r}" onclick="nav('work','${r}')"><i class="wbg">${icons[r]}</i><span class="emoji">${icons[r]}</span><span>${cap(r)}<small>${prog(r)}/8 hôm nay · ${ls?'lần trước '+fmt(ls).slice(0,5):'chưa tập'}</small><em class="bar"><u style="width:${prog(r)*12.5}%"></u></em></span><span class="arrow">${IC.next}</span></button>`}).join('')}</div></div>${footer('home')}`};
+function work(){const ls=sessions(routine).filter(d=>d<date).pop();const sgs=routines[routine].map((_,i)=>suggest(prev(routine,i)));app.innerHTML=`<div class="top ${routine}"><div class="topline"><button class="back" aria-label="Về trang chủ" onclick="nav('home')">‹</button><span class="ticon">${icons[routine]}</span><div><h2>${cap(routine)}</h2><p>Hôm nay ${fmt(date)}${ls?' · lần trước '+fmt(ls).slice(0,5):' · buổi đầu tiên'}</p></div></div><div class="tprog"><span>${prog(routine)}/8 bài đã ghi</span><em class="bar"><u style="width:${prog(routine)*12.5}%"></u></em></div></div><div class="paper" style="--ac:${colors[routine]}">${sgs.some(Boolean)?`<button class="sugall" onclick="document.querySelectorAll('.sug').forEach(b=>b.click())">Dùng tất cả gợi ý cho hôm nay</button>`:''}${routines[routine].map((name,i)=>{const d=stored(routine,date,i),p=prev(routine,i),sg=sgs[i];return `<div class="exercise${has(d)?' done':''}" data-i="${i}"><div class="exhead"><span class="n">${i+1}</span><label>${name}</label></div><div class="exbody"><div class="prevcol">${p?`<small>Lần trước · ${fmt(p.d).slice(0,5)}</small><b>${esc(p.set||'–')}×${esc(p.rep||'–')}</b><em>${p.kg?esc(p.kg)+' kg':'tạ thân'}</em>`:`<small>Lần trước</small><em>Chưa có</em>`}</div><input aria-label="Số set ${name}" readonly inputmode="none" placeholder="Set" value="${esc(d.set||'')}" oninput="edit('${routine}',${i},'set',this.value)"><input aria-label="Số rep ${name}" readonly inputmode="none" placeholder="Rep" value="${esc(d.rep||'')}" oninput="edit('${routine}',${i},'rep',this.value)"><input aria-label="Số kg ${name}" readonly inputmode="none" placeholder="Kg" value="${esc(d.kg||'')}" oninput="edit('${routine}',${i},'kg',this.value)"></div>${sg?`<button class="sug" type="button"><b>Gợi ý hôm nay: ${esc(sg.set||'–')}×${esc(sg.rep||'–')} · ${sg.kg?esc(sg.kg)+' kg':'tạ thân'}</b><span>Dùng</span></button>`:''}</div>`}).join('')}<button class="save ${routine}" onclick="persist();this.textContent='✓ Đã lưu';setTimeout(()=>this.textContent='✓ Lưu bài tập',1200)">✓ Lưu bài tập</button><p class="mini">Dữ liệu tự lưu khi nhập. Lần sau tập ${cap(routine)}, số liệu hôm nay sẽ hiện ở cột "Lần trước". Gợi ý: đạt 12 rep thì tăng tạ (2.5 kg, hoặc 1 kg nếu dưới 20 kg) và về 8 rep; chưa đạt thì giữ tạ và thêm 1 rep. Bạn vẫn sửa tự do. Rep nhập dạng 8, 8/10/10 hoặc Max.</p></div>${footer('')}`};
+function esc(s){return String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;')}function count(){return Object.keys(data).filter(k=>Object.values(data[k]||{}).some(v=>String(v).trim())).length}function dayTypes(d){return Object.keys(routines).filter(r=>routines[r].some((_,i)=>{let v=stored(r,d,i);return v.set||v.rep||v.kg}))}function stats(){const per=Object.keys(routines).map(r=>({r,n:sessions(r).length,last:sessions(r).pop()}));const mx=Math.max(1,...per.map(p=>p.n));app.innerHTML=`<div class="dark header"><h1>Thống kê</h1><p class="sub">Số buổi đã tập theo từng lịch</p></div><div class="settings"><h2>${new Set(per.flatMap(p=>sessions(p.r))).size} ngày đã ghi</h2>${per.map(({r,n,last})=>`<div class="srow"><i class="${r}">${icons[r]}</i><div><strong>${cap(r)} <small class="hint">· gần nhất ${last?fmt(last).slice(0,5):'chưa có'}</small></strong><em class="bar"><u style="width:${n*100/mx}%;background:${colors[r]}"></u></em></div><b>${n}</b></div>`).join('')}<p class="hint">Mỗi buổi là một ngày có ghi ít nhất một bài của lịch đó.</p>${analytics()}</div>${footer('stats')}`};function settings(){app.innerHTML=`<div class="dark header"><h1>Cài đặt</h1><p class="sub">Quản lý dữ liệu tập luyện</p></div><div class="settings">${installed()?'':`<button class="install" onclick="installApp()">Cài app lên màn hình chính</button>`}<button onclick="exportJSON()">Sao lưu dữ liệu (JSON)</button><label class="filebtn">Khôi phục từ file sao lưu<input type="file" accept=".json,application/json" hidden onchange="importJSON(this.files[0])"></label><button onclick="exportCSV()">Xuất dữ liệu CSV</button><button class="danger" onclick="if(confirm('Xóa toàn bộ dữ liệu đã ghi?')){data={};persist();render()}">Xóa toàn bộ ghi chú</button><p class="hint">Dữ liệu lưu trên trình duyệt hiện tại. Nếu xóa dữ liệu trình duyệt, ghi chú có thể mất. Hãy xuất CSV để sao lưu.</p></div>${footer('settings')}`};function exportCSV(){const rows=[['Lịch','Ngày','Bài tập','Set','Rep','Kg']];for(const r of Object.keys(routines))for(const day of sessions(r))routines[r].forEach((name,i)=>{const v=stored(r,day,i);if(has(v))rows.push([r,day,name,v.set||'',v.rep||'',v.kg||''])});const csv='\ufeff'+rows.map(row=>row.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='DZ-Gym-Log.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}const analyticsFilters = { volume: 'all', exercise: 'push:0', metric: 'weight' };
+const chartNumber = new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 2 });
+
+function recordedNumber(value) {
+  const text = String(value ?? '').trim();
+  return /^\d+(?:[.,]\d+)?$/.test(text) ? Number(text.replace(',', '.')) : NaN;
+}
+
+function exerciseMetrics(entry) {
+  const weight = recordedNumber(entry.kg);
+  const sets = recordedNumber(entry.set);
+  const repText = String(entry.rep ?? '').trim();
+  const reps = repText.split('/').map(recordedNumber);
+  const validReps = reps.every(value => Number.isInteger(value) && value > 0);
+  const validSets = Number.isInteger(sets) && sets > 0;
+  let total = NaN;
+  if (validReps && reps.length > 1 && (!String(entry.set ?? '').trim() || sets === reps.length)) {
+    total = reps.reduce((sum, value) => sum + value, 0);
+  } else if (validReps && reps.length === 1 && validSets) {
+    total = sets * reps[0];
+  }
+  return {
+    weight,
+    reps: validReps ? Math.min(...reps) : NaN,
+    volume: weight > 0 ? weight * total : NaN
+  };
+}
+
+function chartBars(points, empty) {
+  const recent = points.filter(point => Number.isFinite(point.value));
+  if (!recent.length) return '<p class="hint">' + empty + '</p>';
+  const max = Math.max(1, ...recent.map(point => point.value));
+  return '<ul class="chart-bars">' + recent.map(({ day, value }) =>
+    '<li><time datetime="' + day + '">' + fmt(day) + '</time>' +
+    '<div class="chart-track" aria-hidden="true"><span style="width:' + (value / max * 100) + '%"></span></div>' +
+    '<strong>' + chartNumber.format(value) + '</strong></li>'
+  ).join('') + '</ul>';
+}
+
+function analytics() {
+  const end = todayStr();
+  const startDate = new Date(end + 'T12:00:00');
+  startDate.setDate(startDate.getDate() - 29);
+  const start = startDate.getFullYear() + '-' + String(startDate.getMonth() + 1).padStart(2, '0') + '-' + String(startDate.getDate()).padStart(2, '0');
+  const inPeriod = day => day >= start && day <= end;
+  const periodLabel = fmt(start) + ' – ' + fmt(end);
+  const group = analyticsFilters.volume;
+  const [track, indexText] = analyticsFilters.exercise.split(':');
+  const index = Number(indexText);
+  const metric = analyticsFilters.metric;
+  const unit = metric === 'weight' ? 'kg' : 'rep';
+  const groups = group === 'all' ? Object.keys(routines) : [group];
+  const totals = new Map();
+  for (const r of groups) {
+    for (const day of sessions(r).filter(inPeriod)) {
+      routines[r].forEach((_, i) => {
+        const { volume } = exerciseMetrics(stored(r, day, i));
+        if (Number.isFinite(volume)) totals.set(day, (totals.get(day) || 0) + volume);
+      });
+    }
+  }
+  const volumePoints = [...totals.keys()].sort().map(day => ({ day, value: totals.get(day) }));
+  const history = sessions(track).filter(inPeriod).map(day => ({ day, entry: stored(track, day, index) })).filter(({ entry }) => has(entry));
+  const points = history.map(({ day, entry }) => ({ day, value: exerciseMetrics(entry)[metric] }))
+    .filter(point => Number.isFinite(point.value));
+
+  const current = points.at(-1);
+  const first = points.length >= 2 ? points[0] : null;
+  const delta = first ? current.value - first.value : 0;
+  const latest = history.at(-1);
+  const target = latest && Number.isFinite(exerciseMetrics(latest.entry).reps) ? suggest(latest.entry) : null;
+  const option = (value, label, selected) => '<option value="' + value + '"' + (value === selected ? ' selected' : '') + '>' + esc(label) + '</option>';
+  return `<div class="analytics">
+    <section class="analytics-panel" aria-labelledby="volume-title">
+      <h2 id="volume-title">Volume theo ngày</h2>
+      <p class="hint">30 ngày · ${periodLabel}</p>
+      <label class="chart-filter">Lịch tập <select data-chart="volume">${option('all', 'Tất cả', group)}${Object.keys(routines).map(r => option(r, cap(r), group)).join('')}</select></label>
+      <p class="hint">Kg × tổng rep. Một số rep được nhân với số set. Dạng 8/10/10 cộng từng set. Chỉ tính bài có tạ và tổng rep xác định được.</p>
+      ${chartBars(volumePoints, 'Chưa có buổi đủ dữ liệu để tính volume.')}
+      ${volumePoints.length ? '<p class="hint">Tổng volume: <strong>' + chartNumber.format(volumePoints.reduce((sum, point) => sum + point.value, 0)) + '</strong> kg × rep</p>' : ''}
+    </section>
+    <section class="analytics-panel" style="--chart-accent:${colors[track]}" aria-labelledby="progress-title">
+      <h2 id="progress-title">Tăng tiến theo bài</h2>
+      <p class="hint">30 ngày · ${periodLabel}</p>
+      <label class="chart-filter">Bài tập <select data-chart="exercise">${Object.entries(routines).map(([r, names]) => '<optgroup label="' + cap(r) + '">' + names.map((name, i) => option(r + ':' + i, name, analyticsFilters.exercise)).join('') + '</optgroup>').join('')}</select></label>
+      <label class="chart-filter">Chỉ số <select data-chart="metric">${option('weight', 'Mức tạ (kg)', metric)}${option('reps', 'Rep thấp nhất mỗi set', metric)}</select></label>
+      ${chartBars(points, 'Chưa có số liệu cho chỉ số này trong 30 ngày.')}
+      ${current ? '<p class="progress-summary">Gần nhất <strong>' + chartNumber.format(current.value) + ' ' + unit + '</strong> · ' + fmt(current.day) + (first ? '<br>So với buổi đầu kỳ ' + fmt(first.day) + ': <strong>' + (delta > 0 ? '+' : '') + chartNumber.format(delta) + ' ' + unit + '</strong>' : '') + '</p>' : ''}
+      ${target ? '<p class="progress-target"><strong>Gợi ý buổi sau</strong><br>' + (target.set ? esc(target.set) + ' set · ' : '') + esc(target.rep) + ' rep · ' + (target.kg ? esc(target.kg) + ' kg' : 'tạ thân') + '</p>' : ''}
+    </section>
+  </div>`;
+}
+
+document.addEventListener('change', event => {
+  const filter = event.target.dataset.chart;
+  if (!Object.hasOwn(analyticsFilters, filter)) return;
+  analyticsFilters[filter] = event.target.value;
+  document.querySelector('.analytics').outerHTML = analytics();
+  document.querySelector('[data-chart="' + filter + '"]').focus({ preventScroll: true });
+});
+function render(){({home,work,stats,settings}[view]||home)()}render();
 
 // Inputs are read-only on purpose: use our 0–9 keypad instead of the phone keyboard.
 let keypadInput=null;
